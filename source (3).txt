@@ -398,7 +398,7 @@ CreateElement("Label", function(Text, TextSize, Transparency)
 		TextColor3 = Color3.fromRGB(240, 240, 240),
 		TextTransparency = Transparency or 0,
 		TextSize = TextSize or 15,
-		Font = Enum.Font.Gotham,
+		Font = Enum.Font.Code,
 		RichText = true,
 		BackgroundTransparency = 1,
 		TextXAlignment = Enum.TextXAlignment.Left
@@ -733,7 +733,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 19, 0.5, 0),
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Font = Enum.Font.GothamBold,
+			Font = Enum.Font.Code,
 			TextTransparency = 1
 		})
 
@@ -774,7 +774,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			AddThemeObject(SetProps(MakeElement("Label", TabConfig.Name, 14), {
 				Size = UDim2.new(1, -35, 1, 0),
 				Position = UDim2.new(0, 35, 0, 0),
-				Font = Enum.Font.GothamSemibold,
+				Font = Enum.Font.Code,
 				TextTransparency = 0.4,
 				Name = "Title"
 			}), "Text")
@@ -822,7 +822,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			end  
 			TweenService:Create(TabFrame.Ico, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
 			TweenService:Create(TabFrame.Title, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
-			TabFrame.Title.Font = Enum.Font.GothamBlack
+			TabFrame.Title.Font = Enum.Font.Code
 			Container.Visible = true   
 		end)
 
@@ -837,7 +837,7 @@ function OrionLib:MakeWindow(WindowConfig)
 					AddThemeObject(SetProps(MakeElement("Label", Text, 15), {
 						Size = UDim2.new(1, -12, 1, 0),
 						Position = UDim2.new(0, 12, 0, 0),
-						Font = Enum.Font.GothamBold,
+						Font = Enum.Font.Code,
 						Name = "Content"
 					}), "Text"),
 					AddThemeObject(MakeElement("Stroke"), "Stroke")
@@ -861,13 +861,13 @@ function OrionLib:MakeWindow(WindowConfig)
 					AddThemeObject(SetProps(MakeElement("Label", Text, 15), {
 						Size = UDim2.new(1, -12, 0, 14),
 						Position = UDim2.new(0, 12, 0, 10),
-						Font = Enum.Font.GothamBold,
+						Font = Enum.Font.Code,
 						Name = "Title"
 					}), "Text"),
 					AddThemeObject(SetProps(MakeElement("Label", "", 13), {
 						Size = UDim2.new(1, -24, 0, 0),
 						Position = UDim2.new(0, 12, 0, 26),
-						Font = Enum.Font.GothamSemibold,
+						Font = Enum.Font.Code,
 						Name = "Content",
 						TextWrapped = true
 					}), "TextDark"),
