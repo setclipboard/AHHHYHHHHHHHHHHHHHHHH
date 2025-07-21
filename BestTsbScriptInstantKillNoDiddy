@@ -1,0 +1,80 @@
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local SoundService = game:GetService("SoundService")
+
+local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
+local gui = Instance.new("ScreenGui", playerGui)
+gui.IgnoreGuiInset = true
+gui.ResetOnSpawn = false
+
+local imageIds = {
+    "rbxassetid://111027759679591",
+    "rbxassetid://88291437779702",
+    "rbxassetid://71124304497254",
+    "rbxassetid://18349623905"
+}
+
+local images = {}
+local spacing = 50
+local imgSize = 200
+local screenSize = workspace.CurrentCamera.ViewportSize
+local totalWidth = (#imageIds * imgSize) + ((#imageIds - 1) * spacing)
+local startX = (screenSize.X - totalWidth) / 2
+
+-- Flashing Text
+local textLabel = Instance.new("TextLabel", gui)
+textLabel.Size = UDim2.new(1, 0, 0, 100)
+textLabel.Position = UDim2.new(0, 0, 0.2, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "GET A JOB LIL BRO"
+textLabel.TextColor3 = Color3.new(1, 0, 0)
+textLabel.TextScaled = true
+textLabel.Font = Enum.Font.Arcade
+textLabel.TextTransparency = 1
+
+-- Flashing animation
+task.spawn(function()
+    for i = 1, 5 do
+        TweenService:Create(textLabel, TweenInfo.new(0.1), {TextTransparency = 0}):Play()
+        wait(0.1)
+        TweenService:Create(textLabel, TweenInfo.new(0.1), {TextTransparency = 1}):Play()
+        wait(0.1)
+    end
+end)
+
+-- Jump scare images
+for i, id in ipairs(imageIds) do
+    local delayTime = math.random() * 0.8
+
+    task.delay(delayTime, function()
+        local img = Instance.new("ImageLabel")
+        img.Parent = gui
+        img.Size = UDim2.new(0, imgSize, 0, imgSize)
+        img.Position = UDim2.new(0, startX + (i - 1) * (imgSize + spacing), 0.5, -imgSize / 2)
+        img.AnchorPoint = Vector2.new(0, 0)
+        img.Image = id
+        img.BackgroundTransparency = 1
+        img.ImageTransparency = 1
+        table.insert(images, img)
+
+        TweenService:Create(img, TweenInfo.new(0.4), {ImageTransparency = 0}):Play()
+
+        local scream = Instance.new("Sound", SoundService)
+        scream.SoundId = "rbxassetid://118071640856292"
+        scream.Volume = 1
+        scream.PlaybackSpeed = 0.9 + (math.random() * 0.4)
+        scream:Play()
+        game.Debris:AddItem(scream, 3)
+    end)
+end
+
+wait(2.5)
+
+for _, img in ipairs(images) do
+    TweenService:Create(img, TweenInfo.new(0.7), {ImageTransparency = 1}):Play()
+end
+
+TweenService:Create(textLabel, TweenInfo.new(0.5), {TextTransparency = 1}):Play()
+
+wait(1)
+gui:Destroy()
